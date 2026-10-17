@@ -127,6 +127,15 @@
     .map-canvas { position: relative; min-height: 275px; overflow: hidden; background: #eaf0e5; border: 1px solid #e5ebe0; border-radius: 12px; }
     #machine-map { position: absolute; inset: 0; z-index: 0; font-family: inherit; }
     .map-canvas .map-tag, .map-legend { z-index: 1000; }
+    .map-canvas .map-tag { position: absolute; top: 11px; right: 11px; padding: 6px 9px; color: #657269; background: rgba(255,255,255,.92); border-radius: 8px; font-size: 9px; font-weight: 700; letter-spacing: .5px; }
+    .location-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .location-tag { color: #657269; font-size: 10px; font-weight: 600; }
+    .location-tag.live { color: var(--green); }
+    .location-tag.live:before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; background: #5c9be2; border-radius: 50%; animation: pulse 1.6s ease-out infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(92,155,226,.55); } 100% { box-shadow: 0 0 0 8px rgba(92,155,226,0); } }
+    .locate-button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; color: var(--green); background: #edf5ed; border: 0; border-radius: 8px; font-size: 10px; font-weight: 700; }
+    .locate-button svg { width: 14px; height: 14px; }
+    .locate-button:hover { background: #e1eedf; }
     .map-fallback { display: grid; place-items: center; height: 100%; padding: 20px; color: var(--muted); font-size: 11px; text-align: center; }
     .machine-icon { background: none; border: 0; }
     .map-pin { display: grid; place-items: center; width: 32px; height: 32px; color: white; background: var(--green); border: 3px solid white; border-radius: 50% 50% 50% 4px; box-shadow: 0 3px 9px rgba(30,66,45,.25); transform: rotate(-45deg); transition: background .15s, scale .15s; cursor: pointer; }
@@ -149,7 +158,48 @@
     .machine-status:before { content: ""; width: 6px; height: 6px; background: #67a16c; border-radius: 50%; }
     .machine-status.closed { color: #a0675a; }
     .machine-status.closed:before { background: #c9806f; }
+    .location-prompt { display: flex; align-items: center; gap: 13px; margin-bottom: 14px; padding: 13px 15px; background: #f2f6eb; border: 1px solid #e1ead6; border-radius: 12px; }
+    .location-prompt[hidden] { display: none; }
+    .location-prompt.blocked { background: #fbf0ec; border-color: #f2ddd5; }
+    .location-prompt-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: 0 0 36px; background: white; border-radius: 10px; font-size: 17px; }
+    .location-prompt-copy { flex: 1; min-width: 0; }
+    .location-prompt-copy strong { display: block; font-size: 12px; }
+    .location-prompt-copy p { margin: 4px 0 0; color: #66746b; font-size: 11px; line-height: 1.55; }
+    .location-prompt.blocked .location-prompt-copy p { color: #8a4b3c; }
+    .location-prompt .primary-button { flex: 0 0 auto; }
     .map-disclaimer { margin: 12px 0 0; color: #919b93; font-size: 9px; line-height: 1.5; }
+    .impact-hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(200px, .8fr); gap: 22px; padding: 30px 33px; color: white; background: var(--forest); border-radius: 20px; }
+    .impact-hero h2 { margin: 16px 0 8px; font-size: 32px; letter-spacing: -1.5px; line-height: 1.15; }
+    .impact-hero h2 em { color: var(--lime); font-style: normal; }
+    .impact-hero p { max-width: 400px; margin: 0; color: #c0cec3; font-size: 12px; line-height: 1.65; }
+    .impact-co2 { align-self: center; padding: 20px; color: var(--forest); background: var(--lime); border-radius: 16px; }
+    .impact-co2 strong { display: block; margin: 10px 0 4px; font-size: 35px; letter-spacing: -1.8px; }
+    .impact-co2 span { color: #566744; font-size: 10px; }
+    .equivalents { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
+    .equivalent { padding: 16px; background: white; border: 1px solid #edf0e9; border-radius: 14px; }
+    .equivalent-icon { font-size: 22px; }
+    .equivalent strong { display: block; margin-top: 10px; font-size: 22px; letter-spacing: -.7px; }
+    .equivalent span { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.5; }
+    .impact-note { margin: 10px 0 0; color: #919b93; font-size: 9px; }
+    .month-chart { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; gap: 7px; height: 170px; padding-top: 10px; }
+    .month-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%; min-width: 0; }
+    .month-bar { display: flex; flex-direction: column-reverse; width: 100%; max-width: 26px; min-height: 2px; overflow: hidden; background: #eef1eb; border-radius: 6px 6px 3px 3px; }
+    .month-bar i { display: block; width: 100%; }
+    .month-label { color: var(--muted); font-size: 9px; font-weight: 650; }
+    .chart-legend { display: flex; gap: 12px; margin-top: 14px; color: #657269; font-size: 9px; }
+    .chart-legend span { display: flex; align-items: center; gap: 5px; }
+    .chart-legend i { width: 8px; height: 8px; border-radius: 2px; }
+    .milestones { display: grid; gap: 13px; }
+    .milestone { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 10px; }
+    .milestone-badge { display: grid; place-items: center; width: 34px; height: 34px; background: #f0f2ee; border-radius: 10px; font-size: 16px; filter: grayscale(1); opacity: .55; }
+    .milestone.done .milestone-badge { background: #eef5e9; filter: none; opacity: 1; }
+    .milestone strong { display: block; font-size: 10px; }
+    .milestone small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .milestone-track { height: 4px; margin-top: 6px; overflow: hidden; background: #eef1eb; border-radius: 4px; }
+    .milestone-track i { display: block; height: 100%; background: #8ab868; border-radius: inherit; }
+    .milestone-state { color: var(--muted); font-size: 9px; font-weight: 700; }
+    .milestone.done .milestone-state { color: var(--green); }
+    .redeemed-list { display: grid; gap: 2px; }
     .modal-backdrop { position: fixed; inset: 0; z-index: 10; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(16,38,29,.52); backdrop-filter: blur(4px); }
     .modal-backdrop.open { display: flex; }
     .modal { width: min(100%, 510px); max-height: min(90vh, 700px); overflow: auto; padding: 24px; background: white; border-radius: 18px; box-shadow: 0 24px 70px rgba(14,42,28,.2); animation: rise .18s ease-out; }
@@ -223,6 +273,8 @@
       .lower-grid { grid-template-columns: 1fr; }
       .map-layout { grid-template-columns: 1fr; }
       .machine-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .impact-hero { padding: 25px; }
+      .equivalents { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .map-canvas { min-height: 250px; }
     }
     @media (max-width: 640px) {
@@ -255,6 +307,13 @@
       .map-canvas { min-height: 225px; }
       .machine-list { grid-template-columns: 1fr; }
       .map-legend { gap: 8px; padding: 7px; font-size: 8px; }
+      .impact-hero { grid-template-columns: 1fr; padding: 23px; }
+      .impact-hero h2 { font-size: 27px; }
+      .equivalents { gap: 9px; }
+      .month-chart { gap: 4px; }
+      .section-heading { flex-wrap: wrap; gap: 10px; }
+      .location-prompt { flex-wrap: wrap; }
+      .location-prompt .primary-button { width: 100%; }
       .panel { padding: 16px; }
     }
     @media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
@@ -324,7 +383,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12v8H4v-8M2 7h20v5H2z"/><path d="M12 20V7m0 0H7.5a2.5 2.5 0 1 1 2.5-2c0 1.1 2 2 2 2Zm0 0h4.5A2.5 2.5 0 1 0 14 5c0 1.1-2 2-2 2Z"/></svg>
           Rewards shop
         </a>
-        <a href="#impact">
+        <a href="#my-impact" data-page="impact">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="M8 12s1.5-3 4-3 4 3 4 3-1.5 3-4 3-4-3-4-3Z"/><path d="M12 9v6"/></svg>
           My impact
         </a>
@@ -422,7 +481,21 @@
       <section class="map-panel" aria-labelledby="map-title">
         <div class="section-heading" style="margin-top: 0">
           <div><h2 id="map-title">Recycling machines in Vientiane</h2><p>Find a convenient drop-off point nearby.</p></div>
-          <span class="map-tag" style="position: static" id="location-tag">📍 Vientiane, Laos</span>
+          <div class="location-actions">
+            <span class="location-tag" id="location-tag" aria-live="polite">📍 Vientiane, Laos</span>
+            <button class="locate-button" type="button" id="locate-me">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>
+              Locate me
+            </button>
+          </div>
+        </div>
+        <div class="location-prompt" id="location-prompt" role="status">
+          <span class="location-prompt-icon" aria-hidden="true">📍</span>
+          <div class="location-prompt-copy">
+            <strong id="location-prompt-title">See recycling machines near you</strong>
+            <p id="location-help">Allow location to show where you are on the map and sort machines by distance. When your browser asks, choose Allow.</p>
+          </div>
+          <button class="primary-button" type="button" id="allow-location">Allow location</button>
         </div>
         <div class="map-layout">
           <div class="map-canvas">
@@ -432,7 +505,52 @@
           </div>
           <div class="machine-list" aria-label="Nearby recycling machines" id="machine-list"></div>
         </div>
-        <p class="map-disclaimer">Machine locations, names, and hours are made up for demonstration. Map data © OpenStreetMap contributors.</p>
+        <p class="map-disclaimer">Machine locations, names, and hours are made up for demonstration. Your location stays in your browser and is never sent anywhere. Map data © OpenStreetMap contributors.</p>
+      </section>
+      </div>
+
+      <div class="page" id="page-impact" hidden>
+      <section class="impact-hero" aria-label="Impact summary">
+        <div>
+          <div class="hero-kicker"><span></span> YOUR IMPACT SO FAR</div>
+          <h2>You've kept <em id="impact-weight">0 kg</em><br>out of landfill.</h2>
+          <p id="impact-summary">Every drop-off adds up. Here's everything your recycling has done.</p>
+        </div>
+        <div class="impact-co2">
+          <div class="points-label">CO₂ EMISSIONS SAVED</div>
+          <strong id="impact-co2">0 kg</strong>
+          <span>compared with sending it to landfill</span>
+        </div>
+      </section>
+
+      <section aria-labelledby="equivalents-title">
+        <div class="section-heading">
+          <div><h2 id="equivalents-title">What that's equal to</h2><p>Your recycling, put in everyday terms.</p></div>
+        </div>
+        <div class="equivalents">
+          <article class="equivalent"><div class="equivalent-icon" aria-hidden="true">🧴</div><strong id="eq-bottles">0</strong><span>plastic bottles kept in use</span></article>
+          <article class="equivalent"><div class="equivalent-icon" aria-hidden="true">🥫</div><strong id="eq-cans">0</strong><span>aluminum cans recycled</span></article>
+          <article class="equivalent"><div class="equivalent-icon" aria-hidden="true">🌳</div><strong id="eq-trees">0</strong><span>trees' worth of paper saved</span></article>
+          <article class="equivalent"><div class="equivalent-icon" aria-hidden="true">🚗</div><strong id="eq-driving">0 km</strong><span>of car driving offset</span></article>
+        </div>
+        <p class="impact-note">Estimates: 25 g per bottle, 15 g per can, 17 trees per tonne of paper, 0.17 kg CO₂ per km driven.</p>
+      </section>
+
+      <div class="lower-grid">
+        <section class="panel" aria-labelledby="monthly-title">
+          <div class="panel-heading"><h2 id="monthly-title">Month by month</h2><span class="stat-label" id="monthly-total"></span></div>
+          <div class="month-chart" id="month-chart" role="img" aria-label="Kilograms recycled per month over the past 12 months"></div>
+          <div class="chart-legend"><span><i style="background:#8ab868"></i>Plastic</span><span><i style="background:#c1ce73"></i>Paper</span><span><i style="background:#7eaa9a"></i>Metal</span></div>
+        </section>
+        <section class="panel" aria-labelledby="milestones-title">
+          <div class="panel-heading"><h2 id="milestones-title">Milestones</h2><span class="stat-label" id="milestone-count"></span></div>
+          <div class="milestones" id="milestones"></div>
+        </section>
+      </div>
+
+      <section class="panel" style="margin-top: 17px" aria-labelledby="redeemed-title">
+        <div class="panel-heading"><h2 id="redeemed-title">Rewards you've earned</h2><span class="stat-label" id="redeemed-total"></span></div>
+        <div class="redeemed-list" id="redeemed-list"></div>
       </section>
       </div>
     </main>
@@ -507,6 +625,7 @@
         weight: 39.5,
         co2: 12.4,
         materials: { plastic: 18.4, paper: 14.2, metal: 6.9 },
+        redemptions: [],
         selected: null,
       };
       const modal = document.getElementById("reward-modal");
@@ -592,7 +711,9 @@
         }
         const reward = state.selected;
         state.points -= reward.cost;
+        state.redemptions.push({ ...reward, date: new Date() });
         syncBalances();
+        renderImpact();
         closeModal();
         const detail = reward.type === "cash"
           ? `$${(reward.cost / 100).toFixed(2)} transfer requested.`
@@ -709,6 +830,119 @@
       };
       renderActivity();
 
+      const materialColors = { plastic: "#8ab868", paper: "#c1ce73", metal: "#7eaa9a" };
+      const setText = (id, text) => { document.getElementById(id).textContent = text; };
+      const renderImpact = () => {
+        const whole = (value) => format(Math.round(value));
+        setText("impact-weight", `${state.weight.toFixed(1)} kg`);
+        setText("impact-co2", `${state.co2.toFixed(1)} kg`);
+        setText("impact-summary", `That's ${activities.length} drop-offs and ${format(state.earned)} points earned. Every one of them kept useful material in circulation.`);
+        setText("eq-bottles", whole(state.materials.plastic / 0.025));
+        setText("eq-cans", whole(state.materials.metal / 0.015));
+        setText("eq-trees", (state.materials.paper * 17 / 1000).toFixed(2));
+        setText("eq-driving", `${whole(state.co2 / 0.17)} km`);
+
+        const now = new Date();
+        const months = Array.from({ length: 12 }, (_, i) => {
+          const start = new Date(now.getFullYear(), now.getMonth() - 11 + i, 1);
+          const items = activities.filter((item) => item.date.getFullYear() === start.getFullYear() && item.date.getMonth() === start.getMonth());
+          const byMaterial = Object.fromEntries(Object.keys(materials).map((key) => [key, items.filter((item) => item.key === key).reduce((sum, item) => sum + item.kg, 0)]));
+          return { start, byMaterial, total: Object.values(byMaterial).reduce((a, b) => a + b, 0) };
+        });
+        const peak = Math.max(...months.map((month) => month.total), 1);
+        const chart = document.getElementById("month-chart");
+        chart.replaceChildren(...months.map((month) => {
+          const col = document.createElement("div");
+          col.className = "month-col";
+          const bar = document.createElement("div");
+          bar.className = "month-bar";
+          bar.style.height = `${Math.max((month.total / peak) * 100, 1.5)}%`;
+          bar.title = `${month.start.toLocaleDateString("en-US", { month: "long", year: "numeric" })}: ${month.total.toFixed(1)} kg`;
+          Object.entries(month.byMaterial).forEach(([key, kg]) => {
+            if (!kg) return;
+            const piece = document.createElement("i");
+            piece.style.height = `${(kg / month.total) * 100}%`;
+            piece.style.background = materialColors[key];
+            bar.append(piece);
+          });
+          const label = document.createElement("span");
+          label.className = "month-label";
+          label.textContent = month.start.toLocaleDateString("en-US", { month: "narrow" });
+          col.append(bar, label);
+          return col;
+        }));
+        setText("monthly-total", `${months.reduce((sum, month) => sum + month.total, 0).toFixed(1)} kg this year`);
+
+        const materialsUsed = Object.keys(materials).filter((key) => activities.some((item) => item.key === key)).length;
+        const milestones = [
+          { icon: "🌱", title: "First drop-off", detail: "Log your first recycling", value: activities.length, goal: 1 },
+          { icon: "🎨", title: "All-rounder", detail: "Recycle plastic, paper, and metal", value: materialsUsed, goal: 3 },
+          { icon: "🥉", title: "10 kg club", detail: "Recycle 10 kg in total", value: state.weight, goal: 10 },
+          { icon: "🥈", title: "25 kg club", detail: "Recycle 25 kg in total", value: state.weight, goal: 25 },
+          { icon: "🥇", title: "50 kg club", detail: "Recycle 50 kg in total", value: state.weight, goal: 50 },
+          { icon: "🏆", title: "Century", detail: "Recycle 100 kg in total", value: state.weight, goal: 100 },
+          { icon: "⭐", title: "Point collector", detail: "Earn 5,000 points", value: state.earned, goal: 5000 },
+        ];
+        document.getElementById("milestones").replaceChildren(...milestones.map((item) => {
+          const done = item.value >= item.goal;
+          const row = document.createElement("div");
+          row.className = `milestone${done ? " done" : ""}`;
+          const badge = document.createElement("span");
+          badge.className = "milestone-badge";
+          badge.setAttribute("aria-hidden", "true");
+          badge.textContent = item.icon;
+          const copy = document.createElement("div");
+          const title = document.createElement("strong");
+          title.textContent = item.title;
+          const detail = document.createElement("small");
+          detail.textContent = item.detail;
+          const track = document.createElement("div");
+          track.className = "milestone-track";
+          const fill = document.createElement("i");
+          fill.style.width = `${Math.min(item.value / item.goal, 1) * 100}%`;
+          track.append(fill);
+          copy.append(title, detail, track);
+          const status = document.createElement("span");
+          status.className = "milestone-state";
+          status.textContent = done ? "Earned" : `${Math.floor(Math.min(item.value / item.goal, 1) * 100)}%`;
+          row.append(badge, copy, status);
+          return row;
+        }));
+        setText("milestone-count", `${milestones.filter((item) => item.value >= item.goal).length} of ${milestones.length} earned`);
+
+        const redeemedList = document.getElementById("redeemed-list");
+        const spent = state.redemptions.reduce((sum, item) => sum + item.cost, 0);
+        setText("redeemed-total", state.redemptions.length ? `${format(spent)} pts spent` : "");
+        if (!state.redemptions.length) {
+          const empty = document.createElement("p");
+          empty.className = "activity-empty";
+          empty.textContent = "No rewards redeemed yet. Your points are waiting in the Rewards shop.";
+          redeemedList.replaceChildren(empty);
+          return;
+        }
+        redeemedList.replaceChildren(...[...state.redemptions].reverse().map((item) => {
+          const row = document.createElement("div");
+          row.className = "activity";
+          const icon = document.createElement("div");
+          icon.className = "activity-icon";
+          icon.setAttribute("aria-hidden", "true");
+          icon.textContent = item.type === "cash" ? "💸" : "🎁";
+          const copy = document.createElement("div");
+          copy.className = "activity-text";
+          const title = document.createElement("strong");
+          title.textContent = item.type === "cash" ? `$${(item.cost / 100).toFixed(2)} cash transfer` : item.label;
+          const when = document.createElement("span");
+          when.textContent = formatWhen(item.date);
+          copy.append(title, when);
+          const amount = document.createElement("div");
+          amount.className = "activity-amount";
+          amount.textContent = `−${format(item.cost)} pts`;
+          row.append(icon, copy, amount);
+          return row;
+        }));
+      };
+      renderImpact();
+
       const logButton = document.getElementById("log-recycling");
       logButton.addEventListener("click", () => {
         const material = window.prompt("What did you recycle? Enter plastic, paper, or metal:");
@@ -739,6 +973,7 @@
         document.getElementById(materialIds[key]).textContent = `${state.materials[key].toFixed(1)} kg`;
         activities.push(makeActivity(key, amount, new Date()));
         renderActivity();
+        renderImpact();
         syncBalances();
         showToast(`Nice work! ${format(points)} points added to your balance.`);
       });
@@ -776,7 +1011,11 @@
         link.addEventListener("click", (event) => {
           event.preventDefault();
           showPage(link.dataset.page, link);
-          if (link.dataset.page === "locations") initMap();
+          if (link.dataset.page === "locations") {
+            initMap();
+            startTrackingIfAllowed();
+          }
+          if (link.dataset.page === "impact") renderImpact();
           const target = link.getAttribute("href") === "#activity" ? document.getElementById("activity") : null;
           if (target) target.scrollIntoView({ behavior: "smooth" });
           else window.scrollTo({ top: 0, behavior: "smooth" });
@@ -800,7 +1039,134 @@
       let selectedMachine = machines[0].id;
       let machineMap = null;
       let youMarker = null;
+      let accuracyCircle = null;
+      let accuracyMeters = 0;
+      let watchId = null;
+      let hasFix = false;
+      let isLive = false;
+      let followUser = false;
       const markers = {};
+      const locateButton = document.getElementById("locate-me");
+      const locationPrompt = document.getElementById("location-prompt");
+      const allowButton = document.getElementById("allow-location");
+
+      const setLocationTag = (text, live) => {
+        locationTag.textContent = text;
+        locationTag.classList.toggle("live", live);
+      };
+      const showLocationPrompt = (title, message, buttonLabel, blocked) => {
+        document.getElementById("location-prompt-title").textContent = title;
+        document.getElementById("location-help").textContent = message;
+        allowButton.textContent = buttonLabel;
+        allowButton.disabled = false;
+        locationPrompt.classList.toggle("blocked", blocked);
+        locationPrompt.hidden = false;
+      };
+      const hideLocationPrompt = () => { locationPrompt.hidden = true; };
+      const safariSteps = "In Safari, open the Safari menu → Settings for this website → Location → Allow, then press Try again. Also check System Settings → Privacy & Security → Location Services is on for Safari.";
+      const stopTracking = () => {
+        if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+      };
+      const nearestMachine = () => machines.reduce((best, machine) =>
+        distanceKm(userPosition, [machine.lat, machine.lng]) < distanceKm(userPosition, [best.lat, best.lng]) ? machine : best);
+      const placeYou = () => {
+        if (!machineMap || !hasFix) return;
+        if (!youMarker) {
+          accuracyCircle = L.circle(userPosition, { radius: accuracyMeters, color: "#5c9be2", weight: 1, fillColor: "#5c9be2", fillOpacity: 0.12, interactive: false }).addTo(machineMap);
+          youMarker = L.marker(userPosition, { icon: L.divIcon({ className: "machine-icon", html: '<span class="you-dot"></span>', iconSize: [18, 18], iconAnchor: [9, 9] }), title: "You", interactive: false, zIndexOffset: 1000 }).addTo(machineMap);
+        }
+        youMarker.setLatLng(userPosition);
+        accuracyCircle.setLatLng(userPosition).setRadius(accuracyMeters);
+      };
+      const centerOnUser = () => {
+        if (!machineMap || !hasFix) return;
+        if (distanceKm(userPosition, vientianeCenter) > 40) {
+          const nearest = nearestMachine();
+          machineMap.flyToBounds([userPosition, [nearest.lat, nearest.lng]], { padding: [40, 40], duration: 0.8 });
+        } else {
+          machineMap.flyTo(userPosition, Math.max(machineMap.getZoom(), 15), { duration: 0.8 });
+        }
+      };
+      const onPosition = (position) => {
+        const { latitude, longitude, accuracy } = position.coords;
+        const firstFix = !isLive;
+        hasFix = true;
+        isLive = true;
+        hideLocationPrompt();
+        userPosition = [latitude, longitude];
+        accuracyMeters = accuracy;
+        const away = distanceKm(userPosition, vientianeCenter);
+        setLocationTag(away > 40 ? `Live · ${Math.round(away).toLocaleString("en-US")} km from Vientiane` : `Live location · ±${Math.round(accuracy)} m`, true);
+        if (firstFix) selectedMachine = nearestMachine().id;
+        renderMachines();
+        placeYou();
+        if (firstFix || followUser) {
+          followUser = false;
+          centerOnUser();
+          if (machineMap) selectMachine(selectedMachine, false);
+        }
+      };
+      const onPositionError = (err) => {
+        if (isLive) return;
+        stopTracking();
+        const problems = {
+          1: ["Location is blocked", safariSteps],
+          2: ["Your Mac couldn't find its location", "Turn on System Settings → Privacy & Security → Location Services, switch on Safari in the list, and make sure Wi-Fi is on. Then press Try again."],
+          3: ["Finding your location took too long", "Make sure Wi-Fi is on, then press Try again."],
+        };
+        const [title, message] = problems[err.code] || ["Couldn't get your location", "Press Try again."];
+        showLocationPrompt(title, `${message} You can also click the map to set where you are.`, "Try again", true);
+        setLocationTag(hasFix ? "📍 Pinned location" : "📍 Location unavailable", false);
+      };
+      const startTracking = () => {
+        if (!navigator.geolocation) {
+          showLocationPrompt("Location isn't available", "This browser doesn't support location. Click the map to set where you are.", "Try again", true);
+          return;
+        }
+        if (watchId !== null) return;
+        if (!isLive) setLocationTag("Finding your location…", false);
+        watchId = navigator.geolocation.watchPosition(onPosition, onPositionError, { enableHighAccuracy: true, maximumAge: 10000, timeout: 20000 });
+      };
+      const pinLocation = ({ lat, lng }) => {
+        if (isLive) return;
+        hasFix = true;
+        userPosition = [lat, lng];
+        accuracyMeters = 0;
+        setLocationTag("📍 Pinned location", false);
+        selectedMachine = nearestMachine().id;
+        renderMachines();
+        placeYou();
+        selectMachine(selectedMachine, false);
+      };
+      // Asking from a button click is what makes Safari show its "Allow" pop-up reliably.
+      const requestLocation = () => {
+        if (isLive) {
+          centerOnUser();
+          return;
+        }
+        followUser = true;
+        allowButton.disabled = true;
+        allowButton.textContent = "Waiting for your browser…";
+        stopTracking();
+        startTracking();
+      };
+      allowButton.addEventListener("click", requestLocation);
+      locateButton.addEventListener("click", requestLocation);
+      // Only start on our own when permission was already granted; otherwise wait for the button.
+      const startTrackingIfAllowed = async () => {
+        if (isLive || watchId !== null) return;
+        try {
+          const status = await navigator.permissions.query({ name: "geolocation" });
+          if (status.state === "granted") startTracking();
+          else if (status.state === "denied") showLocationPrompt("Location is blocked", safariSteps, "Try again", true);
+          status.onchange = () => {
+            if (status.state === "granted" && !isLive) startTracking();
+          };
+        } catch {
+          // Permissions API unavailable: wait for the Allow location button.
+        }
+      };
 
       const vientianeTime = () => {
         const parts = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Vientiane", hour: "numeric", minute: "numeric", hourCycle: "h23" }).formatToParts(new Date());
@@ -877,18 +1243,10 @@
             .bindTooltip(machine.name, { direction: "top", offset: [0, -30] })
             .on("click", () => selectMachine(machine.id, false));
         });
-        youMarker = L.marker(userPosition, { icon: L.divIcon({ className: "machine-icon", html: '<span class="you-dot"></span>', iconSize: [18, 18], iconAnchor: [9, 9] }), title: "You", interactive: false }).addTo(machineMap);
+        machineMap.on("click", (event) => pinLocation(event.latlng));
         selectMachine(selectedMachine, false);
-        if (navigator.geolocation) {
-          navigator.geolocation.watchPosition((position) => {
-            const here = [position.coords.latitude, position.coords.longitude];
-            if (distanceKm(here, vientianeCenter) > 40) return;
-            userPosition = here;
-            youMarker.setLatLng(here);
-            locationTag.textContent = "📍 Using your live location";
-            renderMachines();
-          }, () => {}, { enableHighAccuracy: true, maximumAge: 30000 });
-        }
+        placeYou();
+        centerOnUser();
       };
       renderMachines();
       setInterval(renderMachines, 60000);
