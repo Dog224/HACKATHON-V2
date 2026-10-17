@@ -199,6 +199,36 @@
     .location-prompt.blocked .location-prompt-copy p { color: #8a4b3c; }
     .location-prompt .primary-button { flex: 0 0 auto; }
     .map-disclaimer { margin: 12px 0 0; color: #919b93; font-size: 9px; line-height: 1.5; }
+    .help-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(230px, .8fr); gap: 17px; align-items: start; }
+    .chat-panel { display: flex; flex-direction: column; height: min(620px, calc(100vh - 190px)); min-height: 440px; overflow: hidden; background: white; border: 1px solid #edf0e9; border-radius: 15px; }
+    .chat-header { display: flex; align-items: center; gap: 11px; padding: 14px 17px; border-bottom: 1px solid var(--line); }
+    .chat-avatar { display: grid; place-items: center; width: 36px; height: 36px; background: #edf5e8; border-radius: 50%; font-size: 18px; }
+    .chat-who { flex: 1; }
+    .chat-who strong { display: block; font-size: 12px; }
+    .chat-who small { display: flex; align-items: center; gap: 5px; margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .chat-who small:before { content: ""; width: 6px; height: 6px; background: #67a16c; border-radius: 50%; }
+    .chat-log { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 17px; overflow-y: auto; background: #fafbf8; }
+    .msg { max-width: 82%; padding: 10px 13px; border-radius: 14px; font-size: 12px; line-height: 1.55; overflow-wrap: anywhere; }
+    .msg p { margin: 0; }
+    .msg p + p { margin-top: 6px; }
+    .msg.bot { align-self: flex-start; color: var(--forest); background: white; border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+    .msg.user { align-self: flex-end; color: white; background: var(--green); border-bottom-right-radius: 4px; }
+    .msg-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+    .msg-actions button { padding: 6px 10px; color: var(--green); background: #edf5ed; border: 0; border-radius: 8px; font-size: 11px; font-weight: 700; }
+    .msg-actions button:hover { background: #e1eedf; }
+    .typing { display: flex; gap: 4px; align-items: center; height: 18px; }
+    .typing i { width: 6px; height: 6px; background: #a1aaa3; border-radius: 50%; animation: blink 1s infinite ease-in-out; }
+    .typing i:nth-child(2) { animation-delay: .15s; }
+    .typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes blink { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-2px); } }
+    .chat-suggestions { display: flex; gap: 6px; padding: 10px 17px 0; overflow-x: auto; }
+    .chat-suggestions .chip { flex: 0 0 auto; }
+    .chat-form { display: flex; gap: 8px; padding: 12px 17px 15px; }
+    .chat-form input { flex: 1; min-width: 0; height: 42px; padding: 0 13px; color: var(--forest); border: 1px solid var(--line); border-radius: 10px; outline: none; font: inherit; font-size: 12px; }
+    .chat-form input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(40,116,81,.1); }
+    .topic-list { display: grid; gap: 7px; }
+    .topic-list button { display: flex; align-items: center; gap: 9px; width: 100%; padding: 10px 11px; text-align: left; background: white; border: 1px solid var(--line); border-radius: 10px; font-size: 11px; font-weight: 600; transition: background .15s, border-color .15s; }
+    .topic-list button:hover { background: #f5f9f2; border-color: #92b49b; }
     .impact-hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(200px, .8fr); gap: 22px; padding: 30px 33px; color: white; background: var(--forest); border-radius: 20px; }
     .impact-hero h2 { margin: 16px 0 8px; font-size: 32px; letter-spacing: -1.5px; line-height: 1.15; }
     .impact-hero h2 em { color: var(--lime); font-style: normal; }
@@ -306,6 +336,8 @@
       .machine-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .impact-hero { padding: 25px; }
       .rate-grid { grid-template-columns: 1fr; }
+      .help-layout { grid-template-columns: 1fr; }
+      .msg { max-width: 90%; }
       .calculator { grid-template-columns: 1fr 1fr; }
       .calc-result { grid-column: 1 / -1; }
       .equivalents { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -424,6 +456,10 @@
         <a href="#my-impact" data-page="impact">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="M8 12s1.5-3 4-3 4 3 4 3-1.5 3-4 3-4-3-4-3Z"/><path d="M12 9v6"/></svg>
           My impact
+        </a>
+        <a href="#help" data-page="help">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12Z"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.3"/><circle cx="12" cy="16.3" r=".4" fill="currentColor"/></svg>
+          Customer service
         </a>
       </nav>
       <div class="sidebar-bottom">
@@ -615,6 +651,32 @@
           </div>
         </div>
       </section>
+      </div>
+
+      <div class="page" id="page-help" hidden>
+      <div class="section-heading" style="margin-top: 0">
+        <div><h2 id="help-title">Customer service</h2><p>Ask ReCircle Helper about points, rewards, machines, or anything else in the app.</p></div>
+      </div>
+      <div class="help-layout">
+        <section class="chat-panel" aria-labelledby="help-title">
+          <header class="chat-header">
+            <span class="chat-avatar" aria-hidden="true">🤖</span>
+            <div class="chat-who"><strong>ReCircle Helper</strong><small>Online · automated assistant</small></div>
+            <button class="text-button" type="button" id="chat-reset">New chat</button>
+          </header>
+          <div class="chat-log" id="chat-log" role="log" aria-live="polite"></div>
+          <div class="chat-suggestions" id="chat-suggestions"></div>
+          <form class="chat-form" id="chat-form">
+            <input id="chat-input" type="text" autocomplete="off" maxlength="300" placeholder="Type your question…" aria-label="Your question">
+            <button class="primary-button" type="submit">Send</button>
+          </form>
+        </section>
+        <aside class="panel help-topics" aria-labelledby="topics-title">
+          <div class="panel-heading"><h2 id="topics-title">Popular topics</h2></div>
+          <div class="topic-list" id="topic-list"></div>
+          <p class="impact-note">ReCircle Helper is an automated assistant that answers from the app's own information. Ask for a person any time to open a support ticket.</p>
+        </aside>
+      </div>
       </div>
 
       <div class="page" id="page-impact" hidden>
@@ -1528,6 +1590,260 @@
       };
       renderMachines();
       setInterval(renderMachines, 60000);
+
+      // ReCircle Helper: an in-page assistant that matches questions to help topics and answers from live app data.
+      const chatLog = document.getElementById("chat-log");
+      const chatForm = document.getElementById("chat-form");
+      const chatInput = document.getElementById("chat-input");
+      const goTo = (page) => document.querySelector(`.nav a[data-page="${page}"]`).click();
+      const openMachines = () => {
+        const hour = vientianeTime();
+        return machines.filter((machine) => hour >= machine.open && hour < machine.close);
+      };
+      const ticketId = () => `RC-${Math.floor(10000 + Math.random() * 90000)}`;
+      const rewardChoices = () => [...document.querySelectorAll(".choice")].map((choice) => ({
+        label: choice.querySelector(".choice-copy strong").textContent,
+        cost: Number(choice.dataset.cost),
+        type: choice.dataset.type,
+      }));
+      const askAction = (label) => ({ label, ask: label });
+      const helpTopics = [
+        {
+          id: "greeting", keys: ["hi", "hello", "hey", "sabaidee", "ສະບາຍດີ", "good morning", "good afternoon"],
+          answer: () => ({ text: ["Sabaidee! 👋 I'm ReCircle Helper. What can I help you with today?"], actions: [askAction("How do I earn points?"), askAction("My location isn't showing")] }),
+        },
+        {
+          id: "thanks", keys: ["thanks", "thank", "ຂອບໃຈ", "great", "perfect", "solved"],
+          answer: () => ({ text: ["You're welcome! Anything else I can help with?"] }),
+        },
+        {
+          id: "location", keys: ["location", "gps", "locate", "where am i", "find me", "allow", "permission", "safari", "blue dot", "map", "location not", "isn't showing", "not showing", "can't find me", "ແຜນທີ່", "ສະຖານທີ່"],
+          answer: () => ({
+            text: [
+              "If the map can't find you, it's almost always a permission setting:",
+              "1. On the Recycle location page, press Allow location and choose Allow when your browser asks.",
+              "2. Safari: open the Safari menu → Settings for this website → Location → Allow.",
+              "3. Mac: System Settings → Privacy & Security → Location Services → turn it on for your browser. Keep Wi-Fi on, because Macs use it to find their position.",
+              "Still stuck? Click anywhere on the map to set your location by hand.",
+            ],
+            actions: [{ label: "Open Recycle location", page: "locations" }],
+          }),
+        },
+        {
+          id: "balance", keys: ["balance", "my points", "points do i have", "points left", "how many points do i", "ຄະແນນຂອງຂ້ອຍ"],
+          answer: () => ({
+            text: [`You have ${format(state.points)} points right now, worth about ${kip(state.points)}.`, `You've earned ${format(state.earned)} points in total from ${state.weight.toFixed(1)} kg of recycling.`],
+            actions: [{ label: "Open Rewards shop", modal: true }],
+          }),
+        },
+        {
+          id: "earn", keys: ["earn", "per kg", "how many points", "rate", "worth", "get points", "plastic", "paper", "metal", "cans", "bottle", "cardboard", "ຄະແນນ"],
+          answer: () => ({
+            text: [
+              "Points depend on the material and weight you drop off:",
+              ...Object.entries(materials).map(([key, m]) => `• ${m.icon} ${pointsGuide[key].name}: ${m.pointsPerKg} pts per kg`),
+              `For example, one drink can earns about ${pointsText(0.015 * materials.metal.pointsPerKg)} and a 500 ml bottle about ${pointsText(0.025 * materials.plastic.pointsPerKg)}. 100 points are worth ${kip(100)}.`,
+            ],
+            actions: [{ label: "Open Earn points", page: "points" }],
+          }),
+        },
+        {
+          id: "rewards", keys: ["reward", "redeem", "shop", "gift", "prize", "coffee", "scarf", "basket", "top-up", "topup", "tree", "ລາງວັນ"],
+          answer: () => {
+            const items = rewardChoices().filter((r) => r.type === "item");
+            const affordable = items.filter((r) => r.cost <= state.points).length;
+            return {
+              text: [
+                "You can swap points for local rewards:",
+                ...items.map((r) => `• ${r.label}: ${format(r.cost)} pts`),
+                `With ${format(state.points)} points you can get ${affordable} of these right now. Open the Rewards shop, choose a reward, and press Redeem.`,
+              ],
+              actions: [{ label: "Open Rewards shop", modal: true }],
+            };
+          },
+        },
+        {
+          id: "cash", keys: ["cash", "money", "transfer", "kip", "dollar", "exchange", "withdraw", "bank", "pay", "ເງິນ"],
+          answer: () => ({
+            text: [
+              `Cash out is 500 points for ${kip(500)}. Open the Rewards shop, choose Transfer to money, and enter your email or payment handle.`,
+              `The kip amount follows today's exchange rate ($1 = ₭${format(Math.round(usdToLak))}), which the app checks every hour.`,
+            ],
+            actions: [{ label: "Open Rewards shop", modal: true }],
+          }),
+        },
+        {
+          id: "log", keys: ["log", "how do i log", "log my", "add recycling", "record", "enter", "how do i recycle", "submit", "weigh", "drop off", "drop-off"],
+          answer: () => ({
+            text: ["To log recycling, press + Log recycling at the top of the page, type the material (plastic, paper, or metal), then the weight in kg. Your points are added straight away."],
+            actions: [{ label: "Log recycling now", log: true }, { label: "Open My recycling", page: "recycling" }],
+          }),
+        },
+        {
+          id: "missing", keys: ["missing", "not added", "didn't get", "didnt get", "not credited", "lost points", "wrong points", "no points", "points not", "weren't added", "wasn't added", "haven't received", "not received"],
+          answer: () => {
+            const last = [...activities].sort((a, b) => b.date - a.date)[0];
+            return {
+              text: [
+                last ? `Your latest drop-off was ${materials[last.key].label.toLowerCase()}, ${last.kg.toFixed(1)} kg on ${formatWhen(last.date)}, for +${format(last.points)} pts.` : "I can't see any drop-offs on your account yet.",
+                "If a drop-off is missing, check My recycling first. If it's not there, I can open a ticket so our team can add the points.",
+              ],
+              actions: [{ label: "Open My recycling", page: "recycling" }, askAction("Talk to a person")],
+            };
+          },
+        },
+        {
+          id: "hours", keys: ["open", "hours", "close", "closing", "nearest", "near me", "nearby", "machine", "station", "where", "ຕູ້"],
+          answer: () => {
+            const open = openMachines();
+            const nearest = [...machines].sort((a, b) => distanceKm(userPosition, [a.lat, a.lng]) - distanceKm(userPosition, [b.lat, b.lng]))[0];
+            return {
+              text: [
+                `${open.length} of ${machines.length} machines are open right now.`,
+                `Your nearest is ${nearest.name} (${distanceKm(userPosition, [nearest.lat, nearest.lng]).toFixed(1)} km), open ${hourLabel(nearest.open)}–${hourLabel(nearest.close)}. It accepts ${nearest.accepts.toLowerCase()}.`,
+                isLive ? "Distances use your live location." : "Distances are from central Vientiane. Allow location for distances from where you are.",
+              ],
+              actions: [{ label: "Open Recycle location", page: "locations" }],
+            };
+          },
+        },
+        {
+          id: "broken", keys: ["broken", "full", "not working", "jammed", "stuck", "damaged", "out of order", "won't accept", "wont accept", "machine"],
+          answer: () => ({
+            text: [`Sorry about that! I've opened ticket ${ticketId()} for the machine team.`, "If you tell me which machine it was, I'll add it to the ticket. Meanwhile, the Recycle location page shows other machines that are open now."],
+            actions: [{ label: "Open Recycle location", page: "locations" }],
+          }),
+        },
+        {
+          id: "accepted", keys: ["accept", "accepted", "glass", "battery", "batteries", "electronics", "what can i recycle", "which materials", "allowed", "food"],
+          answer: () => ({
+            text: [
+              "Machines accept plastic bottles and containers, paper and cardboard, and metal cans. Each machine lists what it takes on the Recycle location page.",
+              "Glass, batteries, electronics, and food waste aren't accepted yet. Rinse containers and keep paper dry.",
+            ],
+            actions: [{ label: "Open Earn points", page: "points" }],
+          }),
+        },
+        {
+          id: "account", keys: ["password", "sign in", "login", "log in", "account", "username", "sign out", "logout"],
+          answer: () => ({ text: ["This demo uses one account: username timo, password 123456789. Use Sign out at the bottom of the menu to switch accounts."] }),
+        },
+        {
+          id: "impact", keys: ["impact", "co2", "carbon", "environment", "planet", "emissions"],
+          answer: () => ({
+            text: [`So far you've recycled ${state.weight.toFixed(1)} kg and saved about ${state.co2.toFixed(1)} kg of CO₂, roughly the same as not driving ${format(Math.round(state.co2 / 0.17))} km.`],
+            actions: [{ label: "Open My impact", page: "impact" }],
+          }),
+        },
+        {
+          id: "human", keys: ["human", "agent", "person", "staff", "talk to", "contact", "call", "email", "complaint", "complain", "support"],
+          answer: () => ({ text: [`I've opened support ticket ${ticketId()}. A member of our team will reply here in the app. Is there anything you'd like me to add to it?`] }),
+        },
+      ];
+      const fallback = () => ({
+        text: ["Sorry, I'm not sure I understood that. I can help with points, rewards, cash out, machines, location, and logging recycling. Could you try asking another way?"],
+        actions: [askAction("How do I earn points?"), askAction("Which machines are open now?"), askAction("Talk to a person")],
+      });
+      const matchTopic = (question) => {
+        const text = question.toLowerCase();
+        const words = text.match(/[a-z0-9'-]+/g) || [];
+        let best = null;
+        let bestScore = 0;
+        helpTopics.forEach((topic) => {
+          const score = topic.keys.reduce((sum, key) => {
+            const isPhrase = key.includes(" ") || /[^\x00-\x7f]/.test(key);
+            const hit = isPhrase ? text.includes(key) : words.some((word) => word === key || (key.length > 2 && word.startsWith(key)));
+            return hit ? sum + key.length : sum;
+          }, 0);
+          if (score > bestScore) {
+            best = topic;
+            bestScore = score;
+          }
+        });
+        return best ? best.answer() : fallback();
+      };
+
+      const addMessage = (from, lines, actions = []) => {
+        const bubble = document.createElement("div");
+        bubble.className = `msg ${from}`;
+        lines.forEach((line) => {
+          const p = document.createElement("p");
+          p.textContent = line;
+          bubble.append(p);
+        });
+        if (actions.length) {
+          const row = document.createElement("div");
+          row.className = "msg-actions";
+          actions.forEach((action) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = action.label;
+            button.addEventListener("click", () => {
+              if (action.ask) ask(action.ask);
+              else if (action.page) goTo(action.page);
+              else if (action.modal) openModal();
+              else if (action.log) logButton.click();
+            });
+            row.append(button);
+          });
+          bubble.append(row);
+        }
+        chatLog.append(bubble);
+        chatLog.scrollTop = chatLog.scrollHeight;
+        return bubble;
+      };
+      let replyTimer;
+      const ask = (question) => {
+        const text = question.trim().slice(0, 300);
+        if (!text) return;
+        addMessage("user", [text]);
+        chatLog.querySelector(".typing-bubble")?.remove();
+        const typing = addMessage("bot", []);
+        typing.classList.add("typing-bubble");
+        typing.innerHTML = '<span class="typing" aria-label="ReCircle Helper is typing"><i></i><i></i><i></i></span>';
+        clearTimeout(replyTimer);
+        replyTimer = setTimeout(() => {
+          typing.remove();
+          const reply = matchTopic(text);
+          addMessage("bot", reply.text, reply.actions);
+        }, 450 + Math.random() * 450);
+      };
+      const startChat = () => {
+        clearTimeout(replyTimer);
+        chatLog.replaceChildren();
+        addMessage("bot", ["Sabaidee! 👋 I'm ReCircle Helper, the automated assistant for this app.", "Ask me about points, rewards, cash out, machines, or location problems."]);
+      };
+      chatForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        ask(chatInput.value);
+        chatInput.value = "";
+      });
+      document.getElementById("chat-reset").addEventListener("click", startChat);
+      const quickQuestions = ["How do I earn points?", "How many points do I have?", "Which machines are open now?", "How do I cash out?"];
+      document.getElementById("chat-suggestions").replaceChildren(...quickQuestions.map((question) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chip";
+        chip.textContent = question;
+        chip.addEventListener("click", () => ask(question));
+        return chip;
+      }));
+      const popularTopics = [
+        ["📍", "My location isn't showing"], ["⭐", "How many points do I earn per kg?"], ["💸", "How do I cash out?"],
+        ["🎁", "Which rewards can I get?"], ["❓", "My points weren't added"], ["🛠️", "A machine is broken"],
+        ["♻️", "What can I recycle?"], ["🙋", "Talk to a person"],
+      ];
+      document.getElementById("topic-list").replaceChildren(...popularTopics.map(([icon, question]) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = `${icon} ${question}`;
+        button.addEventListener("click", () => {
+          ask(question);
+          chatInput.focus();
+        });
+        return button;
+      }));
+      startChat();
     })();
   </script>
 </body>
