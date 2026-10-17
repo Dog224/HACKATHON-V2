@@ -97,6 +97,37 @@
     .panel-heading h2 { margin: 0; font-size: 13px; letter-spacing: -.2px; }
     .panel-heading button { color: #738078; background: white; border: 1px solid var(--line); border-radius: 7px; padding: 6px 9px; font-size: 10px; }
     .activity-list { display: grid; max-height: 420px; overflow-y: auto; padding-right: 4px; }
+    .activity-list.full { max-height: none; overflow: visible; padding-right: 0; }
+    .worth-strip { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 15px; padding: 12px 15px; background: #f2f6eb; border-radius: 12px; color: #4f5f54; font-size: 11px; }
+    .worth-strip strong { color: var(--green); }
+    .rate-info { margin-left: auto; color: var(--muted); font-size: 10px; }
+    .rate-info.live:before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 6px; background: #67a16c; border-radius: 50%; vertical-align: 1px; }
+    .rate-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+    .rate-card { display: flex; flex-direction: column; padding: 18px; background: white; border: 1px solid #edf0e9; border-radius: 15px; }
+    .rate-head { display: flex; align-items: center; gap: 11px; }
+    .rate-icon { display: grid; place-items: center; width: 40px; height: 40px; flex: 0 0 40px; background: #eef5e9; border-radius: 11px; font-size: 19px; }
+    .rate-head strong { font-size: 13px; }
+    .rate-value { margin: 16px 0 2px; font-size: 30px; font-weight: 790; letter-spacing: -1.4px; color: var(--green); }
+    .rate-value small { margin-left: 4px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0; }
+    .rate-badge { align-self: flex-start; margin-bottom: 14px; padding: 3px 8px; color: #566744; background: var(--lime); border-radius: 999px; font-size: 9px; font-weight: 750; }
+    .rate-items { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+    .rate-items li { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-top: 1px solid #f0f2ed; font-size: 10px; }
+    .rate-items li span:first-child { color: #4f5f54; }
+    .rate-items li small { color: var(--muted); }
+    .rate-items li span:last-child { color: var(--green); font-weight: 700; white-space: nowrap; }
+    .rate-tip { margin: 12px 0 0; padding-top: 12px; color: var(--muted); border-top: 1px solid #f0f2ed; font-size: 10px; line-height: 1.5; }
+    .calculator { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 14px; align-items: end; }
+    .calculator label { display: grid; gap: 7px; font-size: 10px; font-weight: 650; }
+    .calculator select, .calculator input { width: 100%; height: 42px; padding: 0 11px; color: var(--forest); background: white; border: 1px solid var(--line); border-radius: 9px; outline: none; font: inherit; font-size: 12px; }
+    .calculator select:focus, .calculator input:focus { border-color: var(--green); }
+    .calc-result { display: grid; padding: 10px 14px; color: var(--forest); background: var(--lime); border-radius: 11px; }
+    .calc-result span, .calc-result small { color: #566744; font-size: 10px; }
+    .calc-result strong { font-size: 22px; letter-spacing: -.7px; }
+    .filter-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
+    .chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { padding: 7px 12px; color: #66746b; background: white; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; font-weight: 650; transition: background .15s, border-color .15s; }
+    .chip:hover { border-color: #9abea6; }
+    .chip.active { color: white; background: var(--green); border-color: var(--green); }
     .activity-year { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; padding: 9px 11px; background: #eff5e9; border-radius: 9px; font-size: 11px; font-weight: 700; }
     .activity-year:first-child { margin-top: 0; }
     .activity-year span { color: var(--green); font-size: 10px; font-weight: 650; }
@@ -274,6 +305,9 @@
       .map-layout { grid-template-columns: 1fr; }
       .machine-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .impact-hero { padding: 25px; }
+      .rate-grid { grid-template-columns: 1fr; }
+      .calculator { grid-template-columns: 1fr 1fr; }
+      .calc-result { grid-column: 1 / -1; }
       .equivalents { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .map-canvas { min-height: 250px; }
     }
@@ -287,7 +321,7 @@
       .sidebar { position: fixed; z-index: 5; inset: auto 0 0; width: 100%; height: 61px; flex-direction: row; justify-content: center; padding: 5px 8px; border-top: 1px solid var(--line); border-right: 0; }
       .brand, .nav-label, .sidebar-bottom { display: none; }
       .nav { display: flex; justify-content: space-around; width: 100%; }
-      .nav a { display: grid; justify-items: center; gap: 3px; min-width: 63px; padding: 5px; font-size: 9px; }
+      .nav a { display: grid; justify-items: center; gap: 3px; min-width: 0; flex: 1; padding: 5px 2px; font-size: 8px; text-align: center; }
       .nav svg { width: 18px; height: 18px; }
       main { padding: 23px 17px 30px; }
       .topbar { margin-bottom: 23px; }
@@ -371,7 +405,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></svg>
           Overview
         </a>
-        <a href="#activity" data-page="overview">
+        <a href="#my-recycling" data-page="recycling">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 7h14l-2 9H8L5 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="m10 11 2 2 4-4"/></svg>
           My recycling
         </a>
@@ -382,6 +416,10 @@
         <a href="#rewards" class="redeem-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12v8H4v-8M2 7h20v5H2z"/><path d="M12 20V7m0 0H7.5a2.5 2.5 0 1 1 2.5-2c0 1.1 2 2 2 2Zm0 0h4.5A2.5 2.5 0 1 0 14 5c0 1.1-2 2-2 2Z"/></svg>
           Rewards shop
+        </a>
+        <a href="#earn-points" data-page="points">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 6.5 13.6 10l3.9.4-2.9 2.6.8 3.8L12 14.9l-3.4 1.9.8-3.8-2.9-2.6 3.9-.4L12 6.5Z"/></svg>
+          Earn points
         </a>
         <a href="#my-impact" data-page="impact">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="M8 12s1.5-3 4-3 4 3 4 3-1.5 3-4 3-4-3-4-3Z"/><path d="M12 9v6"/></svg>
@@ -460,10 +498,9 @@
       </section>
 
       <div class="lower-grid">
-        <section class="panel" id="activity" aria-labelledby="activity-title">
-          <div class="panel-heading"><h2 id="activity-title">Recent activity</h2><button type="button" id="activity-filter">Past 12 months⌄</button></div>
-          <div class="activity-list" id="activity-list">
-          </div>
+        <section class="panel" id="recent-activity" aria-labelledby="activity-title">
+          <div class="panel-heading"><h2 id="activity-title">Recent activity</h2><button type="button" id="see-all-recycling">See all ›</button></div>
+          <div class="activity-list" id="recent-list"></div>
         </section>
         <section class="panel" aria-labelledby="materials-title">
           <div class="panel-heading"><h2 id="materials-title">What you've recycled</h2><button type="button" id="materials-period">All time⌄</button></div>
@@ -475,6 +512,45 @@
           </div>
         </section>
       </div>
+      </div>
+
+      <div class="page" id="page-recycling" hidden>
+      <section aria-labelledby="recycling-title">
+        <div class="section-heading" style="margin-top: 0">
+          <div><h2 id="recycling-title">My recycling</h2><p>Every drop-off you've logged, all in one place.</p></div>
+        </div>
+        <div class="filter-bar">
+          <div class="chip-group" role="group" aria-label="Filter by material" id="material-filter">
+            <button class="chip active" type="button" data-material="all" aria-pressed="true">All</button>
+            <button class="chip" type="button" data-material="plastic" aria-pressed="false">♻️ Plastic</button>
+            <button class="chip" type="button" data-material="paper" aria-pressed="false">📦 Paper</button>
+            <button class="chip" type="button" data-material="metal" aria-pressed="false">🥫 Metal</button>
+          </div>
+          <div class="chip-group" role="group" aria-label="Filter by period" id="period-filter">
+            <button class="chip" type="button" data-period="month" aria-pressed="false">This month</button>
+            <button class="chip" type="button" data-period="year" aria-pressed="false">Past 12 months</button>
+            <button class="chip active" type="button" data-period="all" aria-pressed="true">All time</button>
+          </div>
+        </div>
+        <div class="stats">
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 7h14l-2 9H8L5 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg></div>
+            <div><div class="stat-label">DROP-OFFS</div><div class="stat-value" id="filtered-count">0</div></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18m7-15H9a3 3 0 0 0 0 6h6a3 3 0 0 1 0 6H5"/></svg></div>
+            <div><div class="stat-label">WEIGHT</div><div class="stat-value" id="filtered-weight">0 <small>kg</small></div></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 9.5 9.5 3 12l6.5 2.5L12 21l2.5-6.5L21 12l-6.5-2.5L12 3Z"/></svg></div>
+            <div><div class="stat-label">POINTS EARNED</div><div class="stat-value" id="filtered-points">0</div></div>
+          </article>
+        </div>
+      </section>
+      <section class="panel" style="margin-top: 17px" id="activity" aria-labelledby="history-title">
+        <div class="panel-heading"><h2 id="history-title">History</h2><button class="primary-button" type="button" id="log-from-history" style="min-height: 32px; font-size: 11px">+ Log recycling</button></div>
+        <div class="activity-list full" id="activity-list"></div>
+      </section>
       </div>
 
       <div class="page" id="page-locations" hidden>
@@ -506,6 +582,38 @@
           <div class="machine-list" aria-label="Nearby recycling machines" id="machine-list"></div>
         </div>
         <p class="map-disclaimer">Machine locations, names, and hours are made up for demonstration. Your location stays in your browser and is never sent anywhere. Map data © OpenStreetMap contributors.</p>
+      </section>
+      </div>
+
+      <div class="page" id="page-points" hidden>
+      <section aria-labelledby="points-title">
+        <div class="section-heading" style="margin-top: 0">
+          <div><h2 id="points-title">How you earn points</h2><p>Points are based on the weight you drop off. Heavier and more valuable materials earn more.</p></div>
+        </div>
+        <div class="worth-strip">
+          <span>💰 <strong>100 points = <span data-kip="100">₭22,300</span></strong> when you cash out</span>
+          <span class="rate-info" id="rate-info">Loading today's exchange rate…</span>
+          <span>🎁 Local rewards start at <strong>100 points</strong></span>
+        </div>
+        <div class="rate-grid" id="rate-grid"></div>
+        <p class="impact-note">Item weights are typical averages. Machines weigh what you drop off, and points are rounded to the nearest whole point each time you recycle.</p>
+      </section>
+
+      <section class="panel" style="margin-top: 20px" aria-labelledby="calc-title">
+        <div class="panel-heading"><h2 id="calc-title">Points calculator</h2></div>
+        <div class="calculator">
+          <label>Material
+            <select id="calc-material"></select>
+          </label>
+          <label>Weight (kg)
+            <input id="calc-kg" type="number" min="0" max="1000" step="0.1" value="1" inputmode="decimal">
+          </label>
+          <div class="calc-result" aria-live="polite">
+            <span>You'll earn</span>
+            <strong id="calc-points">100 pts</strong>
+            <small id="calc-worth">worth ₭22,300</small>
+          </div>
+        </div>
       </section>
       </div>
 
@@ -565,22 +673,31 @@
       <div class="balance-strip"><span>Available to spend</span><strong><span id="modal-balance">2,450</span> pts</strong></div>
       <div class="choice-list" id="choice-list">
         <button class="choice" type="button" data-type="cash" data-cost="500" data-label="Cash transfer">
-          <span class="choice-icon" aria-hidden="true">💸</span><span class="choice-copy"><strong>Transfer to money</strong><small>Send a cash reward to your account</small></span><span class="choice-price">500 pts = $5</span>
+          <span class="choice-icon" aria-hidden="true">💸</span><span class="choice-copy"><strong>Transfer to money</strong><small>Send a cash reward to your account</small></span><span class="choice-price">500 pts = <span data-kip="500">₭111,600</span></span>
         </button>
-        <button class="choice" type="button" data-type="item" data-cost="800" data-label="Reusable coffee cup">
-          <span class="choice-icon" aria-hidden="true">☕</span><span class="choice-copy"><strong>Reusable coffee cup</strong><small>From Earthwise Goods · Partner shop</small></span><span class="choice-price">800 pts</span>
+        <button class="choice" type="button" data-type="item" data-cost="100" data-label="Mobile top-up ₭20,000">
+          <span class="choice-icon" aria-hidden="true">📱</span><span class="choice-copy"><strong>Mobile top-up ₭20,000</strong><small>For any Lao mobile network</small></span><span class="choice-price">100 pts</span>
         </button>
-        <button class="choice" type="button" data-type="item" data-cost="1200" data-label="Organic cotton tote">
-          <span class="choice-icon" aria-hidden="true">👜</span><span class="choice-copy"><strong>Organic cotton tote</strong><small>From Green Thread · Partner shop</small></span><span class="choice-price">1,200 pts</span>
+        <button class="choice" type="button" data-type="item" data-cost="120" data-label="Iced Lao coffee">
+          <span class="choice-icon" aria-hidden="true">☕</span><span class="choice-copy"><strong>Iced Lao coffee</strong><small>Voucher for a partner café in Vientiane</small></span><span class="choice-price">120 pts</span>
         </button>
-        <button class="choice" type="button" data-type="item" data-cost="2000" data-label="Native seed starter kit">
-          <span class="choice-icon" aria-hidden="true">🌱</span><span class="choice-copy"><strong>Native seed starter kit</strong><small>From Little Wild · Partner shop</small></span><span class="choice-price">2,000 pts</span>
+        <button class="choice" type="button" data-type="item" data-cost="200" data-label="Bamboo sticky rice basket">
+          <span class="choice-icon" aria-hidden="true">🍚</span><span class="choice-copy"><strong>Bamboo sticky rice basket (tip khao)</strong><small>Handwoven by a local craft group</small></span><span class="choice-price">200 pts</span>
+        </button>
+        <button class="choice" type="button" data-type="item" data-cost="250" data-label="Tree planted in your name">
+          <span class="choice-icon" aria-hidden="true">🌳</span><span class="choice-copy"><strong>Plant a tree in your name</strong><small>Planted with a local reforestation group</small></span><span class="choice-price">250 pts</span>
+        </button>
+        <button class="choice" type="button" data-type="item" data-cost="350" data-label="Bolaven Plateau coffee beans">
+          <span class="choice-icon" aria-hidden="true">🫘</span><span class="choice-copy"><strong>Bolaven Plateau coffee beans, 250 g</strong><small>Grown in southern Laos</small></span><span class="choice-price">350 pts</span>
+        </button>
+        <button class="choice" type="button" data-type="item" data-cost="1500" data-label="Handwoven Lao silk scarf">
+          <span class="choice-icon" aria-hidden="true">🧣</span><span class="choice-copy"><strong>Handwoven Lao silk scarf</strong><small>Made by village weavers in Laos</small></span><span class="choice-price">1,500 pts</span>
         </button>
       </div>
       <div class="cash-form" id="cash-form">
         <label for="transfer-destination">Where should we send your money?</label>
         <input id="transfer-destination" type="text" autocomplete="email" placeholder="Email or payment handle">
-        <p class="cash-hint" id="cash-hint">Enter your email or payment handle. 500 points = $5.</p>
+        <p class="cash-hint" id="cash-hint">Enter your email or payment handle. 500 points = <span data-kip="500">₭111,600</span> at today's rate.</p>
       </div>
       <p class="modal-error" id="modal-error" aria-live="polite"></p>
       <button class="primary-button modal-submit" type="button" id="confirm-reward" disabled>Choose a reward to continue</button>
@@ -639,6 +756,9 @@
       let toastTimeout;
 
       const format = (value) => new Intl.NumberFormat("en-US").format(value);
+      // Points keep a fixed value of 100 points = 1 US dollar, shown in Lao kip at the latest exchange rate.
+      let usdToLak = 22300;
+      const kip = (points) => `₭${format(Math.round((points / 100) * usdToLak / 100) * 100)}`;
       const syncBalances = () => {
         pointsBalance.textContent = format(state.points);
         modalBalance.textContent = format(state.points);
@@ -687,6 +807,7 @@
             type: choice.dataset.type,
             cost: Number(choice.dataset.cost),
             label: choice.dataset.label,
+            icon: choice.querySelector(".choice-icon").textContent,
           };
           document.querySelectorAll(".choice").forEach((option) => option.classList.toggle("selected", option === choice));
           const isCash = state.selected.type === "cash";
@@ -711,13 +832,13 @@
         }
         const reward = state.selected;
         state.points -= reward.cost;
-        state.redemptions.push({ ...reward, date: new Date() });
+        state.redemptions.push({ ...reward, kip: kip(reward.cost), date: new Date() });
         syncBalances();
         renderImpact();
         closeModal();
         const detail = reward.type === "cash"
-          ? `$${(reward.cost / 100).toFixed(2)} transfer requested.`
-          : `${reward.label} redeemed from our partner shop.`;
+          ? `${kip(reward.cost)} transfer requested.`
+          : `${reward.label} redeemed! We'll contact you about delivery.`;
         showToast(`${detail} ${format(state.points)} points left.`);
       });
 
@@ -733,6 +854,140 @@
         return date;
       };
       const makeActivity = (key, kg, date) => ({ key, kg, points: Math.round(kg * materials[key].pointsPerKg), date });
+
+      // Typical item weights in kg, used to show points per everyday item.
+      const pointsGuide = {
+        plastic: {
+          name: "Plastic",
+          items: [["Water bottle, 500 ml", 0.025], ["Soft drink bottle, 1.5 L", 0.04], ["Takeaway food container", 0.03], ["Shampoo bottle", 0.06]],
+          tip: "Rinse and squash bottles. Caps can stay on.",
+        },
+        paper: {
+          name: "Paper & cardboard",
+          items: [["Newspaper", 0.2], ["Shoe box", 0.25], ["A4 sheets, pack of 10", 0.05], ["Large moving box", 1]],
+          tip: "Flatten boxes and keep them dry. Greasy pizza boxes can't be recycled.",
+        },
+        metal: {
+          name: "Metal",
+          items: [["Aluminum drink can", 0.015], ["Food tin can", 0.06], ["Aerosol can, empty", 0.08], ["Aluminum foil tray", 0.02]],
+          tip: "Rinse cans and crush them to save space.",
+        },
+      };
+      const pointsText = (value) => `${value < 10 ? value.toFixed(1).replace(/\.0$/, "") : format(Math.round(value))} pts`;
+      const topRate = Math.max(...Object.values(materials).map((m) => m.pointsPerKg));
+      document.getElementById("rate-grid").replaceChildren(...Object.entries(pointsGuide).map(([key, guide]) => {
+        const rate = materials[key].pointsPerKg;
+        const card = document.createElement("article");
+        card.className = "rate-card";
+        const head = document.createElement("div");
+        head.className = "rate-head";
+        const icon = document.createElement("span");
+        icon.className = "rate-icon";
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = materials[key].icon;
+        const name = document.createElement("strong");
+        name.textContent = guide.name;
+        head.append(icon, name);
+        const value = document.createElement("div");
+        value.className = "rate-value";
+        value.append(format(rate));
+        const unit = document.createElement("small");
+        unit.textContent = "pts per kg";
+        value.append(unit);
+        card.append(head, value);
+        if (rate === topRate) {
+          const badge = document.createElement("span");
+          badge.className = "rate-badge";
+          badge.textContent = "BEST VALUE";
+          card.append(badge);
+        } else {
+          value.style.marginBottom = "14px";
+        }
+        const list = document.createElement("ul");
+        list.className = "rate-items";
+        guide.items.forEach(([label, kg]) => {
+          const li = document.createElement("li");
+          const what = document.createElement("span");
+          what.append(`${label} `);
+          const weight = document.createElement("small");
+          weight.textContent = `~${kg < 1 ? `${Math.round(kg * 1000)} g` : `${kg} kg`}`;
+          what.append(weight);
+          const earn = document.createElement("span");
+          earn.textContent = pointsText(kg * rate);
+          li.append(what, earn);
+          list.append(li);
+        });
+        const tip = document.createElement("p");
+        tip.className = "rate-tip";
+        tip.textContent = `💡 ${guide.tip}`;
+        card.append(list, tip);
+        return card;
+      }));
+
+      const calcMaterial = document.getElementById("calc-material");
+      const calcKg = document.getElementById("calc-kg");
+      calcMaterial.replaceChildren(...Object.entries(pointsGuide).map(([key, guide]) => {
+        const option = document.createElement("option");
+        option.value = key;
+        option.textContent = `${materials[key].icon} ${guide.name}`;
+        return option;
+      }));
+      const updateCalculator = () => {
+        const kg = Number(calcKg.value);
+        const valid = Number.isFinite(kg) && kg > 0 && kg <= 1000;
+        const points = valid ? Math.round(kg * materials[calcMaterial.value].pointsPerKg) : 0;
+        document.getElementById("calc-points").textContent = valid ? `${format(points)} pts` : "—";
+        document.getElementById("calc-worth").textContent = valid ? `worth ${kip(points)}` : "Enter a weight up to 1,000 kg";
+      };
+      calcMaterial.addEventListener("change", updateCalculator);
+      calcKg.addEventListener("input", updateCalculator);
+      updateCalculator();
+
+      const rateInfo = document.getElementById("rate-info");
+      const showRate = (live, updated, label = "Live rate") => {
+        document.querySelectorAll("[data-kip]").forEach((el) => { el.textContent = kip(Number(el.dataset.kip)); });
+        updateCalculator();
+        const rate = `$1 = ₭${format(Math.round(usdToLak))}`;
+        const when = updated
+          ? ` · updated ${updated.toLocaleString("en-GB", { timeZone: "Asia/Vientiane", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}`
+          : "";
+        rateInfo.textContent = live || updated ? `${label}: ${rate}${when}` : `Approximate rate: ${rate} (live rate unavailable)`;
+        rateInfo.classList.toggle("live", live);
+      };
+      const rateSources = [
+        async () => {
+          const data = await (await fetch("https://open.er-api.com/v6/latest/USD")).json();
+          return { rate: data.rates.LAK, updated: new Date(data.time_last_update_unix * 1000) };
+        },
+        async () => {
+          const data = await (await fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json")).json();
+          return { rate: data.usd.lak, updated: new Date(`${data.date}T00:00:00Z`) };
+        },
+      ];
+      const loadExchangeRate = async () => {
+        for (const source of rateSources) {
+          try {
+            const { rate, updated } = await source();
+            if (!(rate > 1000 && rate < 1000000)) continue;
+            usdToLak = rate;
+            try { localStorage.setItem("usdToLak", JSON.stringify({ rate, updated })); } catch {}
+            showRate(true, updated);
+            return;
+          } catch {}
+        }
+        try {
+          const saved = JSON.parse(localStorage.getItem("usdToLak"));
+          if (saved?.rate) {
+            usdToLak = saved.rate;
+            showRate(false, new Date(saved.updated), "Last saved rate");
+            return;
+          }
+        } catch {}
+        showRate(false);
+      };
+      showRate(false);
+      loadExchangeRate();
+      setInterval(loadExchangeRate, 60 * 60 * 1000);
       const sampleActivity = [
         [0, 10, 24, "plastic", 1.2], [1, 16, 15, "paper", 3.5], [9, 11, 2, "metal", 0.8],
         [22, 9, 40, "plastic", 2.1], [38, 14, 5, "plastic", 1.6], [51, 18, 30, "paper", 4.2],
@@ -745,8 +1000,9 @@
       ];
       const activities = sampleActivity.map(([days, hour, minute, key, kg]) => makeActivity(key, kg, daysAgo(days, hour, minute)));
       const activityList = document.getElementById("activity-list");
-      const activityFilter = document.getElementById("activity-filter");
-      let activityRange = "year";
+      const recentList = document.getElementById("recent-list");
+      let activityRange = "all";
+      let activityMaterial = "all";
 
       const sameDay = (a, b) => a.toDateString() === b.toDateString();
       const formatWhen = (date) => {
@@ -795,18 +1051,31 @@
         row.append(icon, copy, amount);
         return row;
       };
+      const emptyNote = (text) => {
+        const empty = document.createElement("p");
+        empty.className = "activity-empty";
+        empty.textContent = text;
+        return empty;
+      };
       const renderActivity = () => {
+        const newestFirst = [...activities].sort((a, b) => b.date - a.date);
+        const recent = newestFirst.slice(0, 5);
+        recentList.replaceChildren(...(recent.length ? recent.map(makeActivityRow) : [emptyNote("No recycling logged yet.")]));
+
         const now = new Date();
-        const start = activityRange === "month"
-          ? new Date(now.getFullYear(), now.getMonth(), 1)
-          : new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
-        const visible = activities.filter((item) => item.date >= start).sort((a, b) => b.date - a.date);
+        const start = {
+          month: new Date(now.getFullYear(), now.getMonth(), 1),
+          year: new Date(now.getFullYear() - 1, now.getMonth(), now.getDate()),
+          all: new Date(0),
+        }[activityRange];
+        const visible = newestFirst.filter((item) => item.date >= start && (activityMaterial === "all" || item.key === activityMaterial));
+        const totalKg = visible.reduce((sum, item) => sum + item.kg, 0);
+        document.getElementById("filtered-count").textContent = format(visible.length);
+        document.getElementById("filtered-weight").innerHTML = `${totalKg.toFixed(1)} <small>kg</small>`;
+        document.getElementById("filtered-points").textContent = format(visible.reduce((sum, item) => sum + item.points, 0));
         activityList.replaceChildren();
         if (!visible.length) {
-          const empty = document.createElement("p");
-          empty.className = "activity-empty";
-          empty.textContent = "No recycling logged for this period yet.";
-          activityList.append(empty);
+          activityList.append(emptyNote("No recycling matches these filters yet."));
           return;
         }
         const years = new Map();
@@ -926,11 +1195,11 @@
           const icon = document.createElement("div");
           icon.className = "activity-icon";
           icon.setAttribute("aria-hidden", "true");
-          icon.textContent = item.type === "cash" ? "💸" : "🎁";
+          icon.textContent = item.icon;
           const copy = document.createElement("div");
           copy.className = "activity-text";
           const title = document.createElement("strong");
-          title.textContent = item.type === "cash" ? `$${(item.cost / 100).toFixed(2)} cash transfer` : item.label;
+          title.textContent = item.type === "cash" ? `${item.kip} cash transfer` : item.label;
           const when = document.createElement("span");
           when.textContent = formatWhen(item.date);
           copy.append(title, when);
@@ -985,12 +1254,23 @@
         event.currentTarget.textContent = event.currentTarget.textContent.startsWith("All time") ? "This month⌄" : "All time⌄";
         showToast("Your recycling totals are shown for the selected period.");
       });
-      activityFilter.addEventListener("click", () => {
-        activityRange = activityRange === "year" ? "month" : "year";
-        activityFilter.textContent = activityRange === "year" ? "Past 12 months⌄" : "This month⌄";
-        renderActivity();
-        showToast("Activity list updated for the selected period.");
+      const setupChips = (groupId, attribute, apply) => {
+        const chips = document.querySelectorAll(`#${groupId} .chip`);
+        chips.forEach((chip) => chip.addEventListener("click", () => {
+          chips.forEach((other) => {
+            other.classList.toggle("active", other === chip);
+            other.setAttribute("aria-pressed", String(other === chip));
+          });
+          apply(chip.dataset[attribute]);
+          renderActivity();
+        }));
+      };
+      setupChips("material-filter", "material", (value) => { activityMaterial = value; });
+      setupChips("period-filter", "period", (value) => { activityRange = value; });
+      document.getElementById("see-all-recycling").addEventListener("click", () => {
+        document.querySelector('.nav a[data-page="recycling"]').click();
       });
+      document.getElementById("log-from-history").addEventListener("click", () => logButton.click());
       document.getElementById("materials-period").addEventListener("click", (event) => {
         event.currentTarget.textContent = event.currentTarget.textContent.startsWith("All time") ? "This month⌄" : "All time⌄";
         showToast("Material totals are shown for the selected period.");
@@ -1016,9 +1296,7 @@
             startTrackingIfAllowed();
           }
           if (link.dataset.page === "impact") renderImpact();
-          const target = link.getAttribute("href") === "#activity" ? document.getElementById("activity") : null;
-          if (target) target.scrollIntoView({ behavior: "smooth" });
-          else window.scrollTo({ top: 0, behavior: "smooth" });
+          window.scrollTo({ top: 0, behavior: "smooth" });
         });
       });
       const machines = [
